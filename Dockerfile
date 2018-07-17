@@ -15,7 +15,7 @@ RUN apk add --no-cache python3 py3-requests py3-paramiko py3-psutil \
 # Cache script
 RUN mkdir -p /opt/dodas
 COPY cache.py /opt/dodas/
-RUN ln -s /opt/dodas/cache.py /usr/local/sbin/dodas_cache
+RUN ln -sf /opt/dodas/cache.py /usr/local/bin/dodas_cache
 
 EXPOSE 22
 
