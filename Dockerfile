@@ -7,10 +7,10 @@ RUN apk add --no-cache openssh \
   && echo "root:root" | chpasswd
 
 # Python env for cache script
-RUN apk add --no-cache python3 py3-pynacl \
+RUN apk add --no-cache python3 py3-requests py3-paramiko py3-psutil \
     && python3 -m ensurepip \
     && pip3 install --upgrade pip setuptools \
-    && pip3 install j2cli paramiko psutil kazoo requests
+    && pip3 install j2cli kazoo
 
 # Cache script
 RUN mkdir -p /opt/dodas
