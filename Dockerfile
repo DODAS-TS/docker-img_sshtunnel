@@ -2,9 +2,9 @@ FROM alpine:latest
 
 # OpenSSH Server
 RUN apk add --no-cache openssh \
-  && sed -i s/#PermitRootLogin.*/PermitRootLogin\ yes/ /etc/ssh/sshd_config \
-  && ssh-keygen -A \
-  && echo "root:root" | chpasswd
+    && sed -i s/#PermitRootLogin.*/PermitRootLogin\ yes/ /etc/ssh/sshd_config \
+    && ssh-keygen -A \
+    && echo "root:root" | chpasswd
 
 # Python env for cache script
 RUN apk add --no-cache python3 py3-requests py3-paramiko py3-psutil \
