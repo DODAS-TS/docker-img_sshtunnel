@@ -30,4 +30,5 @@ ENV TUNNEL_FROM="UNDEFINED"
 ENV TUNNEL_TO="UNDEFINED"
 ENV TARGET_SSH_PORT=31042
 
-CMD ["/usr/local/bin/dodas_cache_entrypoint"]
+# CMD ["/usr/local/bin/dodas_cache_entrypoint"]
+CMD ["/usr/sbin/sshd", "-D"]
