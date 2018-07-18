@@ -9,7 +9,8 @@ def main():
     try:
         client = SSHClient()
         client.set_missing_host_key_policy(AutoAddPolicy)
-        client.connect("localhost", port=environ.get('TARGET_SSH_PORT', 31042),
+        client.connect(environ.get('TARGET_HOST', 'localhost'),
+                       port=environ.get('TARGET_SSH_PORT', 31042),
                        username="admin", password="passwd")
     except (BadHostKeyException, AuthenticationException,
             SSHException):
