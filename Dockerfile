@@ -13,9 +13,11 @@ RUN apk add --no-cache python3 py3-requests py3-paramiko py3-psutil \
     && pip3 install j2cli kazoo
 
 # Cache script
-RUN mkdir -p /opt/dodas
-COPY cache.py /opt/dodas/
-RUN ln -sf /opt/dodas/cache.py /usr/local/bin/dodas_cache
+RUN mkdir -p /opt/dodas/cache
+COPY cache.py /opt/dodas/cache/
+COPY entrypoint.sh /opt/dodas/cache/
+RUN ln -sf /opt/dodas/cache/cache.py /usr/local/bin/dodas_cache \
+    && ln -sf /opt/dodas/cache/entrypoint.sh /usr/local/bin/dodas_cache_entrypoint
 
 EXPOSE 22
 
