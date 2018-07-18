@@ -1,17 +1,17 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 mkdir -p /opt/dodas/keys
-echo "==> Copy keys"
+echo "==> Copy keys [TARGET_PRIV_KEY, TARGET_PUB_KEY]"
 dodas_cache --wait-for true zookeeper TARGET_PRIV_KEY > /opt/dodas/keys/id_rsa
 dodas_cache --wait-for true zookeeper TARGET_PUB_KEY > /opt/dodas/keys/id_rsa.pub
 chmod go-rw /opt/dodas/keys/id_rsa
 chmod go-w /opt/dodas/keys/id_rsa.pub
 echo "==> Check tunnel endpoints"
-if [ "$TUNNEL_FROM" == "UNDEFINED" ];
+if [ "$TUNNEL_FROM" == "UNDEFINED" ] || [ -z "$TUNNEL_FROM" ];
 then
     export TUNNEL_FROM="$TARGET_SSH_PORT"
 fi
-if [ "$TUNNEL_TO" == "UNDEFINED" ];
+if [ "$TUNNEL_TO" == "UNDEFINED" ] || [ -z "$TUNNEL_TO" ];
 then
     export TUNNEL_TO="$TARGET_SSH_PORT"
 fi
