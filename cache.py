@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Module for caching variables in different stores."""
 import argparse
 import json
@@ -588,7 +588,7 @@ def main():
         cache = MemoryCache()
 
     cur_var = getattr(cache, args.variable)
-        
+
     if args.value is not None:
         cur_var.value = converter[args.value_type](
             args.value)
