@@ -344,7 +344,10 @@ class ZookeeperCache(CacheManager):
         :returns: self
 
         """
-        host_list = literal_eval(zookeeper_host_list)
+        if zookeeper_host_list.find("[") != -1 and zookeeper_host_list.find("]") != -1:
+            host_list = literal_eval(zookeeper_host_list)
+        else:
+            host_list = zookeeper_host_list.split(",")
         self.zookeeper_host_list = ",".join(
             [host + ":2181" if host.find(":") == -
              1 else host for host in host_list]
