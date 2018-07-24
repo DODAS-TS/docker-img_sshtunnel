@@ -338,13 +338,18 @@ class ZookeeperCache(CacheManager):
         The list is normally retreived from the envirnment
         variables where is stored as a string like:
 
-        ZOOKEEPER_HOST_LIST="['10.1.4.2']"
+        ZOOKEEPER_HOST_LIST="['10.1.4.2',...]"
+
+        or
+
+        ZOOKEEPER_HOST_LIST=10.1.4.2:2181,...
 
         :param zookeeper_host_list: str
         :returns: self
 
         """
-        if zookeeper_host_list.find("[") != -1 and zookeeper_host_list.find("]") != -1:
+        if zookeeper_host_list.find(":") == -1 and\
+                (zookeeper_host_list.find("[") != -1 and zookeeper_host_list.find("]") != -1):
             host_list = literal_eval(zookeeper_host_list)
         else:
             host_list = zookeeper_host_list.split(",")
