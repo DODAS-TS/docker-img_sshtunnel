@@ -15,6 +15,6 @@ if [ "$TUNNEL_TO" == "UNDEFINED" ] || [ -z "$TUNNEL_TO" ];
 then
     export TUNNEL_TO="$TARGET_SSH_PORT"
 fi
-export TARGET_HOST=$(dodas_cache --wait-for true zookeeper TARGET_HOST)
-echo "==> Start sshd tunnel"
+export TARGET_HOST=`dodas_get_target_ip $(dodas_cache --wait-for true zookeeper TARGET_HOST)`
+echo "==> Start sshd tunnel: [$TUNNEL_FROM:$TARGET_HOST:$TUNNEL_TO]"
 exec ssh -N -g -L $TUNNEL_FROM:$TARGET_HOST:$TUNNEL_TO -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no admin@$TARGET_HOST -p $TARGET_SSH_PORT -i /opt/dodas/keys/id_rsa

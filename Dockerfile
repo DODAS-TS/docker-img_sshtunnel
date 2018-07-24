@@ -16,10 +16,12 @@ RUN apk add --no-cache python3 py3-requests py3-paramiko py3-psutil \
 RUN mkdir -p /opt/dodas/cache \
     && mkdir -p /opt/dodas/health_checks
 COPY cache.py /opt/dodas/cache/
+COPY get_target_ip.py /opt/dodas/cache/
 COPY entrypoint.sh /opt/dodas/cache/
 COPY check_ssh_server.py /opt/dodas/health_checks/
 COPY check_ssh_tunnel.sh /opt/dodas/health_checks/
 RUN ln -sf /opt/dodas/cache/cache.py /usr/local/bin/dodas_cache \
+    && ln -sf /opt/dodas/cache/get_target_ip.sh /usr/local/bin/dodas_get_target_ip \
     && ln -sf /opt/dodas/cache/entrypoint.sh /usr/local/bin/dodas_cache_entrypoint \
     && ln -sf /opt/dodas/health_checks/check_ssh_server.py /usr/local/bin/dodas_check_ssh_server \
     && ln -sf /opt/dodas/health_checks/check_ssh_tunnel.sh /usr/local/bin/dodas_check_ssh_tunnel
